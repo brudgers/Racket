@@ -29,12 +29,6 @@
 ;; (listof Image) -> (listof Graphic)
 ;; turns a list of images to a list of graphics
 
-(check-expect (new-log empty)empty)
-
-(check-expect (new-log (list BLANK))
-              (list (make-graphic BLANK 0 0)))
-
-
 (define (new-log loi)
   (local [(define (new-graphic i)
           (make-graphic i (area i)(perimeter i)))
@@ -50,9 +44,6 @@
 ;; (listof Graphic) -> (listof Images)
 ;; unboxes images from graphic structure
 
-(check-expect (unbox-images LOG)LOI)
-(check-expect (unbox-images (reverse LOG))(reverse LOI))
-
 
 (define (unbox-images log)
   (local [(define (graphic->image g)
@@ -67,48 +58,12 @@
 ;; compares to Graphics using a field and returns true if they 
 ;; the predicate is true
 
-(check-expect (compare-graphic (second LOG)
-                               (third LOG)
-                               graphic-perimeter
-                               >)
-              false)
-
-(check-expect (compare-graphic (second LOG)
-                               (third LOG)
-                               graphic-perimeter
-                               <)
-              true)
-(check-expect (compare-graphic (second LOG)
-                               (third LOG)
-                               graphic-area
-                               >)
-              false)
-
-(check-expect (compare-graphic (second LOG)
-                               (third LOG)
-                               graphic-area
-                               <)
-              true)
-
 (define (compare-graphic a b field p?)
   (p? (field a) (field b)))
 
 ;; Graphic Graphic -> Boolean
 ;; Two Functions for comparing perimeter
 ;; or area
-
-(check-expect (smaller-perimeter? (third LOG)
-                                  (second LOG))
-              false)
-(check-expect (smaller-perimeter? (second LOG)
-                                  (third LOG))
-              true)
-(check-expect (smaller-area? (third LOG)
-                             (second LOG))
-              false)
-(check-expect (smaller-area? (second LOG)
-                             (third LOG))
-              true)
 
 
 (define (smaller-perimeter? a b)
@@ -127,12 +82,6 @@
 ;; (listof Graphic) (Number Number -> Boolean) -> (listof Graphic)
 ;; sorts a list of graphics on Graphics Predicate
 
-(check-expect (fn-sort-graphic LOG smaller-area?) LOG)
-(check-expect (fn-sort-graphic (reverse LOG) smaller-area?) LOG)
-(check-expect (fn-sort-graphic LOG larger-area?) (reverse LOG))
-(check-expect (fn-sort-graphic (reverse LOG) larger-area?) (reverse LOG))
-
-
 (define (fn-sort-graphic log p?)
   (local [(define (insert x lox)
             (cond [(empty? lox) (cons x empty)]
@@ -150,30 +99,17 @@
 ;; (listof Graphic) -> (listof Graphic)
 ;; sorts a list of graphics on area
 
-(check-expect (sort-smaller-area LOG) LOG)
-(check-expect (sort-smaller-area (reverse LOG)) LOG)
-
-
 (define (sort-smaller-area log)
   (fn-sort-graphic log smaller-area?))
-
-(check-expect (sort-larger-area LOG) (reverse LOG))
-(check-expect (sort-larger-area (reverse LOG)) (reverse LOG))
 
 (define (sort-larger-area log)
   (fn-sort-graphic log larger-area?))
 
 ;; (listof Graphic) -> (listof Graphic)
 ;; sorts a list of graphics on perimeter
-(check-expect (sort-smaller-perimeter LOG) LOG)
-(check-expect (sort-smaller-perimeter (reverse LOG)) LOG)
-
 
 (define (sort-smaller-perimeter log)
   (fn-sort-graphic log smaller-perimeter?))
-
-(check-expect (sort-larger-perimeter LOG) (reverse LOG))
-(check-expect (sort-larger-perimeter (reverse LOG)) (reverse LOG))
 
 (define (sort-larger-perimeter log)
   (fn-sort-graphic log larger-perimeter?))
@@ -197,17 +133,10 @@
 ;; (listof Graphic) -> Graphic
 ;; functions to return median size graphic from a list of Graphics
 
-(check-expect (median-perimeter LOG)
-              (make-graphic (square 15 "solid" "red")
-                            (* 15 15)
-                            (* 4 15)))
-
 (define (median-perimeter log)
   (list-ref (sort-smaller-perimeter log) 
             (round(/ (length log) 2)))) ; (round x) rounds to even
 
-
-(check-expect (median-area LOG)(make-graphic (square 15 "solid" "red")(* 15 15)(* 4 15)))
 
 (define (median-area log)
   (list-ref (sort-smaller-area log) 
