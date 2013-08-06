@@ -1,5 +1,8 @@
 Racket
 ======
+###Verbal Expressions###
+An implementation of Verbal Expressions in Racket
+[Currently unfinished]
 
 ###FunWithImageSorting.rkt:###
   
