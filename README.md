@@ -3,6 +3,7 @@ Racket
 ###Verbal Expressions###
 An implementation of Verbal Expressions in Racket
 [Currently unfinished]
+The names of the functions which translate to Regex are in camelCase. It favors idiomatic Verbal-Expressions style over idiomatic Scheme style. In the long run, the racket implementation could be a new language which is case insensitive - but it isn't currently.
 
 
 ###FunWithImageSorting.rkt:###
