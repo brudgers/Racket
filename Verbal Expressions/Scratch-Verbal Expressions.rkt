@@ -1,3 +1,11 @@
+;; TODO
+;; - add 'startOfLine to dispatch
+;; - add 'endOfLine to dispatch
+;; - add 'reset to dispatch
+;; - add 'then       "
+;; - add 'find       "
+;; - add 'maybe      "
+
 #lang racket
 (require "./ve-strings.rkt")
 (require "ve-expressions.rkt")
