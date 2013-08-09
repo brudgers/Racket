@@ -99,7 +99,7 @@
                        (next-src ";;")
                        (next-suf "$")
                        (next-mod "i")
-                       (regex))
+                       (endCapture))
                 (string-append "^"";;""$""i"))
 
   (check-expect (begin (reset)
@@ -107,7 +107,7 @@
                        (next-src ";;")
                        (next-suf "$")(next-suf "$")
                        (next-mod "i")(next-mod "i")
-                       (regex))
+                       (endCapture))
                 (string-append "^"";;""$""i"))
     
   (check-expect (begin (reset)
@@ -115,7 +115,7 @@
                        (next-src ";;")
                        (next-suf "$")(next-suf "k")
                        (next-mod "i")(next-mod "k")
-                       (regex))
+                       (endCapture))
                 (string-append "^"";;""$k""ik")))
 
 ;; String  -> String
@@ -127,7 +127,7 @@
 
 ;; -> String
 ;; return the regular expression
-(define (regex)
+(define (endCapture)
   (string-append ve-prefix
                  ve-source
                  ve-suffix
