@@ -28,16 +28,6 @@
 ;; Uses message passing model
 ;; Internal use of set! only
 
-;; String -> String
-;; sanitation for safely adding
-;; anything to string
-;; !!!
-(define (ve-sanitize str) str) ; stub
-
-
-
-
-
 ;; Symbol -> Side Effect | ""
 (define (sym-dispatch sym)
   (cond [(eq? sym 'anything)(anything)]
